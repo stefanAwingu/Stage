@@ -1,8 +1,9 @@
-# Dag 1 #
+# Stagedagboek #
+## Maandag 15/2/2016 ##
 - Kennismaking met chocolatey 
 - Opzetten webserver
 - Auto-install Finance Explorer
-# Dag 2 #
+## Dinsdag 16/2/2016 ##
 - Afwerken webserver
 - Auto-install office
 - Afwerken Auto-install Finance Explorer
