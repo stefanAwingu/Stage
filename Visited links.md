@@ -3,3 +3,9 @@
 [http://www.labtechgeek.com/forum/viewtopic.php?f=6&t=674](http://www.labtechgeek.com/forum/viewtopic.php?f=6&t=674)
 
 [http://portableapps.com/node/14174](http://portableapps.com/node/14174)
+
+[http://stackoverflow.com/questions/9612609/how-do-i-set-windows-update-to-never-check-for-updates-with-powershell](http://stackoverflow.com/questions/9612609/how-do-i-set-windows-update-to-never-check-for-updates-with-powershell "http://stackoverflow.com/questions/9612609/how-do-i-set-windows-update-to-never-check-for-updates-with-powershell")
+
+[http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/](http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/ "http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/")
+
+[https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/](https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/ "https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/")
