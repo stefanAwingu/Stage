@@ -78,6 +78,8 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
     resumeAfterBoot
     # Set the dns to the ad-server IP
     Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 172.26.17.4
+    # Enable WMI firewall rule
+    Enable-NetFirewallRule -DisplayName "Windows Management Instrumentation (WMI-In)"
     # Join a domain
     $domainName = Read-Host 'Give the domain name you wish to join.'
     Add-Computer -DomainName $domainName -Restart

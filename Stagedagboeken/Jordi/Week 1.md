@@ -10,3 +10,5 @@
 - Script voor aanpassen windows update
 - Script voor aanpassen regkeys
 - Script voor toevoegen tot domein
+##Woensdag 17/2/2016
+- Testen en debuggen van AppserverSetup script
