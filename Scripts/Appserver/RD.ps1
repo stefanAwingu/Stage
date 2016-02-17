@@ -1,13 +1,20 @@
+#Get FQDN
 $serverNaam = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
 $collectionNaam = "RemoteApssCollection"
 
 try{
+    #Maakt nieuwe Remote Desktop Session role aan met ConnectionBroker, SessionHost en WebAccesServer (gelijk aan quickinstall via GUI)
    New-RDSessionDeployment -ConnectionBroker $serverNaam `        -SessionHost $serverNaam `        -WebAccessServer $serverNaam -ErrorAction Stop
-   Restart-Computer -Wait -Confirm
-   Write-Host "Created new RDS deployment on: $serverName"
    
+   #Restart bij Error van bij ConnectionBroker validation die vaak voorkomt (en opgelost is na 1 restart)
+   if($Error[0].ToString() -match "The server has reboots pending and needs to be restarted."){
+        Restart-Computer -Confirm -Force    
+    }
+   
+   #Maakt eigen Collection aan
    New-RDSessionCollection -CollectionName $collectionNaam `        -ConnectionBroker $serverNaam `        -SessionHost $serverNaam -ErrorAction Stop
-  
+   
+   #Publisht alle apps met de nodige commandline settings
    New-RDRemoteApp -Alias Acces -DisplayName Acces -FilePath "C:\Program Files (x86)\Microsoft Office\Office15\MSACCESS.EXE" `       -ShowInWebAcces 1 -CollectionName $collectionNaam -ConnectionBroker $serverNaam -CommandLineSetting Allow
    New-RDRemoteApp -Alias Outlook -DisplayName Outlook -FilePath "C:\Program Files (x86)\Microsoft Office\Office15\OUTLOOK.EXE" `       -ShowInWebAcces 1 -CollectionName $collectionNaam -ConnectionBroker $serverNaam -CommandLineSetting Allow
    New-RDRemoteApp -Alias Excell -DisplayName Excell -FilePath "C:\Program Files (x86)\Microsoft Office\Office15\EXCEL.EXE" `       -ShowInWebAcces 1 -CollectionName $collectionNaam -ConnectionBroker $serverNaam -CommandLineSetting Allow
