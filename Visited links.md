@@ -28,3 +28,6 @@
 [http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/](http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/ "http://powershell.org/wp/forums/topic/working-with-multistring-registry-property/")
 
 [https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/](https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/ "https://blogs.technet.microsoft.com/heyscriptingguy/2012/05/12/weekend-scripter-use-powershell-to-easily-modify-registry-property-values/")
+
+### Policies
+[http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html](http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html "http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html")
