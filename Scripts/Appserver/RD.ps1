@@ -1,24 +1,24 @@
-#Get FQDN
+function resumeAfterBoot{
+    set-location HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce
+    new-itemproperty . MyKey -propertytype String -value "Powershell $PSCommandPath"
+}
+
+#Get FQDN of verander dit en geef FQDN van remote server in
 $serverNaam = (Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain
 $collectionNaam = "RemoteApssCollection"
-#aparte webserver poging
-$webAccesServer = "Webserver.awingu.test"
+
 
 try{
    #Maakt nieuwe Remote Desktop Session role aan met ConnectionBroker, SessionHost en WebAccesServer (gelijk aan quickinstall via GUI)
-   #Problem: Kan niet local
-   #Problem: WebAccessServer is required en maakt een webserver aan (niet ideaal) -> Onze webserver als target proberen meegeven maar dit geeft meer errors.
-   New-RDSessionDeployment -ConnectionBroker $serverNaam `        -SessionHost $serverNaam `        -WebAccessServer $webAccesServer #$servernaam
+   #Problem: Kan niet local runnen dus moet vanuit een andere desktop uit hetzelfde domein
+   #Problem: WebAccessServer is required en maakt een webserver aan, mag dit??
+   New-RDSessionDeployment -ConnectionBroker $serverNaam `        -SessionHost $serverNaam `        -WebAccessServer $servernaam 
 
    #Restart bij Error van bij ConnectionBroker validation die vaak voorkomt (en opgelost is na 1 restart)
    #ToDo: Automatisch script verder zetten na restart remote server?
    if($Error[0].ToString() -match "The server has reboots pending and needs to be restarted."){
-        if($Error[0].ToString() -match "RD Web Access server"){
-            Restart-Computer -Confirm -ComputerName $webAccesServer -Force
-        }
-        else{
-            Restart-Computer -Confirm -ComputerName $serverNaam -Force
-        }    
+            resumeAfterBoot
+            Restart-Computer -ComputerName $serverNaam -Force -Verbose   
     }
        
    #Maakt eigen Collection aan
