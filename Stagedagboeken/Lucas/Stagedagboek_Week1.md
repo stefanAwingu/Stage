@@ -18,3 +18,21 @@
 * Scripts uitschrijven
 * Remote desktop opzetten op fileserver
 * Remote desktop script uitwerken
+
+##Woensdag 17/02
+
+* Remote Desktop script uitwerken
+* Probleem met Remoting oplossen
+* Probleem met WebAccessServer oplossen
+* Server crashes opzoeken
+* ErrorHandling uitzoeken en implementeren
+
+##Donderdag 18/02
+
+* Remote Desktop script uitwerken
+* Demo geven werk voorbije week
+* DNS reverse lookup zone instellen
+* WMI probleem oplossen bij Remoting
+* ErrorHandling verder uitzoeken na feedback
+* Automatisch remote server heropstarten in script
+* Documentatie Chocolatey verder uitbouwen

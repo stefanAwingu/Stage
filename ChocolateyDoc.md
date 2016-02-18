@@ -114,3 +114,37 @@ Hierna test je de package door in de folder van u package (waar de nupkg staat)
 		choco install packageName -fdv -s $pwd -y
 
 uit te voeren.
+
+
+##Quick install guide
+
+First install chocolatey on the computer.:       
+In PowerShell (Administrator mode) run the command:    
+`iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))`     
+
+This will install chocolatey and let you use it to install, uninstall, upgrade, ... with the following commands:    
+
+**install:**
+`choco install <pkg|packages.config> [<pkg2> <pkgN>] [<options/switches>]`   
+
+**uninstall:**   
+You will likely have to use the automatic uninstaller featrue, this has to be turned on via the following command:    
+`choco feature enable -n autoUninstaller`
+Then you can uninstall via:   
+`choco uninstall <pkg|all> [pkg2 pkgN] [options/switches]`   
+
+**list & search:**
+`choco search <filter> [<options/switches>]`   
+`choco list <filter> [<options/switches>]`   
+
+**upgrade:**
+`choco upgrade <pkg|all> [<pkg2> <pkgN>] [<options/switches>]`    
+
+**outdated:**   
+This shows a list of all the packages that need updates.    
+`choco outdated [<options/switches>]`
+
+
+##Links
+
+[How to install.](https://github.com/chocolatey/choco/wiki/Installation)
