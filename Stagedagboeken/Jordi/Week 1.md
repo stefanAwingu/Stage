@@ -1,5 +1,6 @@
 # Stagedagboek #
 ## Maandag 15/2/2016 ##
+- Opzetten werkomgeving
 - Kennismaking met chocolatey 
 - Opzetten webserver
 - Auto-install Finance Explorer
