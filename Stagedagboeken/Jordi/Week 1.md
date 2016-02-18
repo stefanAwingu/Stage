@@ -13,3 +13,13 @@
 - Script voor toevoegen tot domein
 ##Woensdag 17/2/2016
 - Testen en debuggen van AppserverSetup script
+- Alle aparte scripts in 1 script samen zetten
+- verschillende functies van de scripts maken
+##Donderdag 18/2/2016
+- Het AppserverSetup script verfijnen
+	- zorgen dat het locatie onafhankelijk is
+	- verschillende variabelen gebruiken
+	- laatste keer testen op nieuwe VM
+- Demo geven van de afgewerkte scripts
+- GPO manueel instellen en dit backuppen
+- GPO backup via een command importen   

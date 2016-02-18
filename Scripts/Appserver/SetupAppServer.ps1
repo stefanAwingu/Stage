@@ -101,7 +101,7 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
     # Set the dns to the ad-server IP
     setDNS
     # Enable WMI firewall rule
-    Enable-NetFirewallRule -DisplayName "Winredows Management Instrumentation (WMI-In)"
+    Enable-NetFirewallRule -DisplayName "Windows Management Instrumentation (WMI-In)"
     # Join a domain
     addToDomain
 }else{
