@@ -1,5 +1,7 @@
 ﻿# Script for automated install and configuration appserver
+$ErrorActionPreference = 'Silent'
 function setupRegKey{
+
     $values=@(
              "TLS_RSA_WITH_AES_128_CBC_SHA256",
              "TLS_RSA_WITH_AES_128_CBC_SHA",
@@ -34,14 +36,33 @@ function setupRegKey{
              )
     Set-ItemProperty -Path HKLM:SYSTEM\CurrentControlSet\Control\Cryptography\Configuration\Local\SSL\00010002 -Name functions -Value $values
 }
+
+function addToDomain{
+$domainName = Read-Host 'Give the domain name you wish to join.'
+Add-Computer -DomainName $domainName -Restart
+if($Error[0].ToString() -match "The specified domain either does not exist or could not be contacted"){
+    Write-Host "Please enter a valid domain name."
+    $Error.Clear()
+    addToDomain
+ }
+elseIf($Error[0].ToString() -match "The user name or password is incorrect"){
+    Write-Host "Please enter a valid user name or password."
+    $Error.Clear()
+    addToDomain   
+ }
+ }
+
 function resumeAfterBoot{
     set-location HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce
-    new-itemproperty . MyKey -propertytype String -value "Powershell $PSScriptRoot\SetupAppServer.ps1"
+    new-itemproperty . MyKey -propertytype String -value "Powershell $PSCommandPath"
 }
+
 function setDNS{
-    Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 172.26.17.4
+    $dnsAddress = Read-Host 'Give the dns address you wish to set'
+    Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses $dnsAddress
 
 }
+
 function Expand-ZIPFile($file, $destination){
     $shell = new-object -com shell.application
     $zip = $shell.NameSpace($file)
@@ -50,6 +71,7 @@ function Expand-ZIPFile($file, $destination){
     $shell.Namespace($destination).copyhere($item)
     }
     }
+
 function installSoftware{
      # Get the nupkg files
     $url = "http://172.26.17.11/files/nupkg.zip"
@@ -65,7 +87,7 @@ function installSoftware{
     choco install googlechrome -y
     choco install kitty.portable -y
     choco install firefox -y
-    cd C:\Users\azure\Desktop
+    cd $PSScriptRoot
     choco install office.1.0.0.nupkg -fdv -s $pwd -y
     choco install financeexplorer.8.0.0.nupkg -fdv -s $pwd -y
 }
@@ -77,12 +99,11 @@ if ((gwmi win32_computersystem).partofdomain -eq $false) {
     # Resume this script after a boot
     resumeAfterBoot
     # Set the dns to the ad-server IP
-    Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 172.26.17.4
+    setDNS
     # Enable WMI firewall rule
-    Enable-NetFirewallRule -DisplayName "Windows Management Instrumentation (WMI-In)"
+    Enable-NetFirewallRule -DisplayName "Winredows Management Instrumentation (WMI-In)"
     # Join a domain
-    $domainName = Read-Host 'Give the domain name you wish to join.'
-    Add-Computer -DomainName $domainName -Restart
+    addToDomain
 }else{
     #Install software
     #Step 1. Install chocolatey
