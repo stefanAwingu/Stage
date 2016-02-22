@@ -1,6 +1,18 @@
 # Remote Desktop Role
 
 ## Script
+[https://github.com/Xplendit/Stage/blob/master/Scripts/Appserver/RD.ps1]()
+
+The script uses the Remote-Desktop Powershell commands to install a Remote-Desktop Role and publish a selection of applications.
+
+`New-RDSessionDeployment` Installs the role and configures your server as a RD-ConnectionBroker, RD-SessionHost and RD-WebAccessServer.
+
+During this installation your server is validated, this will often give an error. The most common one "Your server has reboots pending and needs to be restarted." is caught by some basic Error-Handling (which will just reboot the target server).   
+The other commonly encountered error is "You cannot restart the local server". This occurs when you run this script locally and there seems to be no fix for this.
+
+`New-RDSessionCollection` Creates a collection where you can publish your applications.
+
+And every remote application is published via `New-RDRemoteApp`. 
 
 ## Problems
 

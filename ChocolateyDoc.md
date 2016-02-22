@@ -1,9 +1,39 @@
 #Chocolatey
 
-## Installeren chocolatey
+Chocolatey is a global PowerShell execution engine using the NuGet packaging infrastructure. Think of it as the ultimate automation tool for Windows.
+
+Chocolatey is like apt-get, but built with Windows in mind (there are differences and limitations). For those unfamiliar with APT/Debian, think about Chocolatey as a global silent installer for applications and tools. It can also do configuration tasks and anything that you can do with PowerShell. 
+
+## Installing chocolatey
+
+In PowerShell (Administrator mode) run the command:
+
 	(iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')))>$null 2>&1
 
-##Installeren packages
+##Useful commands
+
+**install:**
+`choco install <pkg|packages.config> [<pkg2> <pkgN>] [<options/switches>]`   
+
+**uninstall:**   
+You will likely have to use the automatic uninstaller feature, this has to be turned on via the following command:    
+`choco feature enable -n autoUninstaller`
+Then you can uninstall via:   
+`choco uninstall <pkg|all> [pkg2 pkgN] [options/switches]`   
+
+**list & search:**
+`choco search <filter> [<options/switches>]`   
+`choco list <filter> [<options/switches>]`   
+
+**upgrade:**
+`choco upgrade <pkg|all> [<pkg2> <pkgN>] [<options/switches>]`    
+
+**outdated:**   
+This shows a list of all the packages that need updates.    
+`choco outdated [<options/switches>]`
+
+
+#Our Version
 
 ###To install:
 - Access
@@ -16,61 +46,35 @@
 - Powerpoint
 - Word
 
-### basis script:
+### basic:
 
-		choco install msaccess2010-redist-x64 -y
-		choco install googlechrome -y
-		choco install kitty.portable -y
-		choco install firefox -y
+Google Chrome, Firefox and Kitty have existing packages in Chocolatey, so they can be installed simply by using `choco install`.
 
-Werkt voor alle 4 (Acces misschien niet 100%).   
+Every Office program (Acces, Excell, Outlook, Powerpoint and Word) and Finance Explorer will need to be installed seperatly via new packages. 
 
-Excel, Powerpoint en Word zijn deel van Office.
-[Office Home Premium](https://chocolatey.org/packages/Office365HomePremium)
+## [New packages](https://github.com/chocolatey/choco/wiki/CreatePackages)
 
---> Erros bij installeren??
-
-Gebruik van iso voor Office:
-
-[Chocolatey wiki](https://github.com/chocolatey/choco/wiki/How-To-Mount-An-Iso-In-Chocolatey-Package)
-
-
-Outlook en finance explorer geen chocolatey package. (Zelf maken?)
-
-## Werking Chocolatey ([nieuwe packages](https://github.com/chocolatey/choco/wiki/CreatePackages))
-
-Chocolatey maakt volgens een standaard template een nieuwe package aan. 
-
-		Choco new $packageNaam
-
-De package wordt aangemaakt in de Directory waar je het commando uitvoert.
-In de map vind je enkele files waarvan 2 zeer belangrijk zijn. de **.nuspec** en **chocolateyInstall.ps1**.
+When you use the `choco new ` command, Chocolatey makes a new directory with the name of the package. In this directory you'll find several files. A **.nuspec** file which contains the data for packaging your package. And a sub folder named "tools" which contains the ChocolateyInstall and ChocolateyUninstall Powershell scripts. These scripts need to be adjusted to the needs of your software program. 
 
 ### [ChocolateyInstall.ps1](https://github.com/chocolatey/choco/wiki/ChocolateyInstallPS1)
 
-Hier komt een PowerShell script dat de package uiteindelijk installeert. Dit moet je zelf aanpassen naar de specificaties van elke package.
+This will retrieve the installation files from the source you want (standard is from a http link) and pass these files with the necessary data to the ChocolateyPackager. It may be possible that you'll have to edit extra files, this is different for every program. (Uninstall works via the same principle.)
 
 ### .nuspec
 
-Dit is de template die gebruikt wordt om de install files te packagen. Als het installscript correct werkt wordt dit normaal vanzelf ingevuld.
+This is the template that's used to package everything. Normally you shouldn't have to edit this very much, all the data you can enter is mostly optional and only necessary if you want to publish the package on the Chocolatey site.
 
-Nadat je het install script aangepast hebt moet je de package inpakken. Dit doe je door:
-
-		choco pack
-
-of   
-
-		cpack
+Finally you can package your files with `choco pack` or `cpack`. 
   
-Als dit slaagt test je de package door in PowerShell
+You can test this (and also use the package) via:
 
 		choco install package-name -s "$pwd" -f
 
-[Alle helper functies](https://github.com/chocolatey/choco/wiki/HelpersReference)
+[All helper functions and there documentation.](https://github.com/chocolatey/choco/wiki/HelpersReference)
 
 ## Package via ISO (Office2013)
 
-basis code in chocolateyInstall.ps1:
+basic code in chocolateyInstall.ps1:
 
 	try {
 	    $iso = Get-Item 'C:\Users\azure1\Downloads\officeISO.iso'
@@ -83,7 +87,7 @@ basis code in chocolateyInstall.ps1:
 	    Dismount-DiskImage -ImagePath $iso
 	}
 
-nuspec file aanpassen tot:
+edit .nuspec file:
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
@@ -103,48 +107,28 @@ nuspec file aanpassen tot:
     <file src="tools\**" target="tools" />
   	</files>
 	</package>
+The most important (and the only one that's required) tag is "version", this is required to have a value like for example: "1.2.3"   
 
-Hierna zou **cpack** moeten werken. 
-Om een silent install uit te voeren moet je ook nog de **config.xml** van Office zelf aanpassen.
-De file vind je in de ISO onder **ProPlus\WWW**.
-Hierna moet je wel een nieuwe ISO burnen zodat de nieuwe xml file bij de andere bestanden staat.    
+To install Office "silently" you'll have to edit the **config.xml** file. You'll find it in the folder  **ProPlus\WWW**. The ISO will have to be rebuild with the correct file.  
 
-Hierna test je de package door in de folder van u package (waar de nupkg staat)
+	<Configuration Product="ProPlus">
+
+	 <Display Level="none" CompletionNotice="no" SuppressModal="yes" AcceptEula="yes" /> 
+	 
+	 <Setting Id="SETUP_REBOOT" Value="Never" />
+	 
+	 <Setting Id="SETUP_REBOOT" Value="ReallySuppress" />
+	
+	
+	</Configuration>
+
+Next you use `cpack` to package everything. 
+And finally you can use and test your package with:
 
 		choco install packageName -fdv -s $pwd -y
-
-uit te voeren.
-
-
-##Quick install guide
-
-First install chocolatey on the computer.:       
-In PowerShell (Administrator mode) run the command:    
-`iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))`     
-
-This will install chocolatey and let you use it to install, uninstall, upgrade, ... with the following commands:    
-
-**install:**
-`choco install <pkg|packages.config> [<pkg2> <pkgN>] [<options/switches>]`   
-
-**uninstall:**   
-You will likely have to use the automatic uninstaller featrue, this has to be turned on via the following command:    
-`choco feature enable -n autoUninstaller`
-Then you can uninstall via:   
-`choco uninstall <pkg|all> [pkg2 pkgN] [options/switches]`   
-
-**list & search:**
-`choco search <filter> [<options/switches>]`   
-`choco list <filter> [<options/switches>]`   
-
-**upgrade:**
-`choco upgrade <pkg|all> [<pkg2> <pkgN>] [<options/switches>]`    
-
-**outdated:**   
-This shows a list of all the packages that need updates.    
-`choco outdated [<options/switches>]`
 
 
 ##Links
 
+[Choco wiki.](https://github.com/chocolatey/choco/wiki)
 [How to install.](https://github.com/chocolatey/choco/wiki/Installation)
