@@ -15,7 +15,7 @@
       "type": "string"
     },
     "vmSize": {
-      "defaultValue": "A2",
+      "defaultValue": "Standard_A2",
       "type": "string"
     },
     "StorageAccountName": {
