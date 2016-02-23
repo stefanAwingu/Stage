@@ -1,0 +1,18 @@
+1. Windows Server 2012 R2 Datacenter
+2. implementatiemodel: Resource Manager
+3. Naam: Vm-naam
+4. GebruikersNaam: naam
+5. Wachtwoord: pwd
+6. Abonnement: BizSpark Plus
+7. Resourcegroep: arm-deployment
+8. Locatie: West-Europa
+9. Grootte: A2-Standard
+10. OpslagAccount: pythondeploy
+11. Virtueel Netwerk: qazureng
+12. Subnet: azure-python (172.26.17.0/24)
+13. Openbaar IP-adres: (nieuw) Dynamisch
+14. Netwerkbeveiligingsgroep: arm-deployment-nsg
+15. Diagnostische geg: ingeschakeld
+16. Opslag voor diagnose: pythondeploy
+17. Beschikbaarheidsset: Geen
+
