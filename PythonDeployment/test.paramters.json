@@ -6,9 +6,6 @@
         "location": {
             "value": "westeurope"
         },
-        "dnsNameForPublicIP": {
-            "value": "test"
-        },
         "existingVirtualNetworkName": {
             "value": "qazureng"
         },
