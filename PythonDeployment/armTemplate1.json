@@ -54,7 +54,7 @@
     "imageSKU": "2012-R2-Datacenter",
     "vnetName": "qazureng",
     "vmNamePrefix": "TestDeployment",
-    "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('existingVirtualNetworkName'))]",
+    "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
   },
   "resources": [
