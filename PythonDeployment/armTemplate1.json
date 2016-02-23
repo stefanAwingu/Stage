@@ -28,6 +28,13 @@
       "metadata": {
         "description": "Name of the existing VNET resource group"
       }
+    },
+    "existingVirtualNetworkName": {
+      "type": "string",
+      "defaultValue": "qazureng",
+      "metadata": {
+        "description": "Name of the existing VNET"
+      }
     }
   },
   "variables": {
