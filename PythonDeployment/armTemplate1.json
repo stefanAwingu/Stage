@@ -55,9 +55,9 @@
   "variables": {
     "storageAccountType": "Standard_LRS",
     "nic1NamePrefix": "[parameters('vmName')]",
-    "imagePublisher": "MicrosoftWindowsServer",
-    "imageOffer": "WindowsServer",
-    "imageSKU": "2012-R2-Datacenter",
+    "imagePublisher": "Canonical",
+    "imageOffer": "UbuntuServer",
+    "imageSKU": "15.04",
     "vnetName": "qazureng",
     "vmNamePrefix": "[parameters('vmName')]",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
@@ -122,7 +122,7 @@
             "publisher": "[variables('imagePublisher')]",
             "offer": "[variables('imageOffer')]",
             "sku": "[variables('imageSKU')]",
-            "version": "latest"
+            "version": "15.04.201508180"
           },
           "osDisk": {
             "name": "pythonWindows",
