@@ -59,7 +59,7 @@
     "nicName": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
-    "imageSKU": "2012-R2-Datacenter",
+    "imageSKU": "2012-R2-Datacenter"
   },
   "resources": [
     {
