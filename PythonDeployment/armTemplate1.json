@@ -133,7 +133,7 @@
           "networkInterfaces": [
             {
               "properties": {
-                "primary": true
+                "primary": "true"
               },
               "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1NamePrefix'))]"
             },
