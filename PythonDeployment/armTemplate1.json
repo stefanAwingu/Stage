@@ -3,23 +3,23 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "storageAccountName": {
-      "value": "arm-deployment",
+      "defaultValue": "arm-deployment",
       "type": "string"
     },
     "adminUsername": {
-      "value": "azure",
+      "defaultValue": "azure",
       "type": "string"
     },
     "adminPassword": {
-      "value": "S3rv3r123",
+      "defaultValue": "S3rv3r123",
       "type": "string"
     },
     "vmSize": {
-      "value": "A2",
+      "defaultValue": "A2",
       "type": "string"
     },
     "StorageAccountName": {
-      "value": "arm-deployment",
+      "defaultValue": "arm-deployment",
       "type": "string"
     },
   },
