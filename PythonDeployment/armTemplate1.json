@@ -69,7 +69,7 @@
         "storage": "[variables('vnetName')]"
       }
     },
-        {
+    {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nic1NamePrefix')]",
