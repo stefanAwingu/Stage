@@ -46,6 +46,10 @@
     "vmName":{
       "type": "string",
       "defaultValue": "TestPythonDeploy"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "West-Europe"
     }
   },
   "variables": {
@@ -95,7 +99,7 @@
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "MyVM",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nic1NamePrefix'))]",
