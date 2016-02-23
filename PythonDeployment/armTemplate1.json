@@ -61,7 +61,8 @@
     "vnetName": "qazureng",
     "vmNamePrefix": "[parameters('vmName')]",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
+    "securityGroupName":"arm-deployment-nsg"
   },
   "resources": [
     {
@@ -92,7 +93,10 @@
               }
             }
           }
-        ]
+        ],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('securityGroupName'))]"
+        }
       }
     },
     {
