@@ -70,7 +70,6 @@
     "imageOffer": "WindowsServer",
     "imageSKU": "2012-R2-Datacenter",
   },
-  },
   "resources": [
     {
       "apiVersion": "[variables('api-version')]",
