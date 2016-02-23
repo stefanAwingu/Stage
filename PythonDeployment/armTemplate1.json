@@ -35,12 +35,18 @@
       "metadata": {
         "description": "Name of the existing VNET"
       }
+    },
+    "subnetName": {
+      "type": "string",
+      "defaultValue": "azure-python",
+      "metadata": {
+        "description": "Name of the subnet in the virtual network you want to use"
+      }
     }
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
     "addressPrefix": "172.26.17.0/16",
-    "subnetName": "azure-python",
     "subnetPrefix": "172.26.17.0/24",
     "nic1NamePrefix": "nic2",
     "imagePublisher": "MicrosoftWindowsServer",
