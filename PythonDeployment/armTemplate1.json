@@ -49,7 +49,7 @@
     },
     "location": {
       "type": "string",
-      "defaultValue": "West-Europe"
+      "defaultValue": "West Europe"
     }
   },
   "variables": {
