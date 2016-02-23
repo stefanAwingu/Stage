@@ -65,7 +65,8 @@
               "addressPrefix": "[variables('subnetPrefix')]"
             }
           }
-        ]
+        ],
+        "storage": "[parameters('storageAccountName')]"
       }
     },
         {
