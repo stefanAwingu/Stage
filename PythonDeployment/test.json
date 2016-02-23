@@ -24,12 +24,6 @@
         "description": "Type of OS on the existing vhd"
       }
     },
-    "osDiskVhdUri": {
-      "type": "string",
-      "metadata": {
-        "description": "Uri of the existing VHD in ARM standard or premium storage"
-      }
-    },
     "vmSize": {
       "type": "string",
       "metadata": {
@@ -54,6 +48,10 @@
         "description": "Name of the subnet in the virtual network you want to use"
       }
     },
+    "StorageAccountName": {
+      "defaultValue": "arm-deployment",
+      "type": "string"
+    },
     "dnsNameForPublicIP": {
       "type": "string",
       "metadata": {
@@ -68,6 +66,10 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
     "nicName": "[parameters('vmName')]",
     "publicIPAddressName": "[parameters('vmName')]"
+    "imagePublisher": "MicrosoftWindowsServer",
+    "imageOffer": "WindowsServer",
+    "imageSKU": "2012-R2-Datacenter",
+  },
   },
   "resources": [
     {
@@ -129,14 +131,19 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('imagePublisher')]",
+            "offer": "[variables('imageOffer')]",
+            "sku": "[variables('imageSKU')]",
+            "version": "latest"
+          },
           "osDisk": {
-            "name": "[concat(parameters('vmName'))]",
-            "osType": "[parameters('osType')]",
-            "caching": "ReadWrite",
+            "name": "osdisk",
             "vhd": {
-              "uri": "[parameters('osDiskVhdUri')]"
+              "uri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/','osdisk', '.vhd')]"
             },
-            "createOption": "Attach"
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
           }
         },
         "networkProfile": {
