@@ -28,7 +28,7 @@
     "addressPrefix": "172.26.17.0/16",
     "subnetName": "azure-python",
     "subnetPrefix": "172.26.17.0/24",
-    "nic1NamePrefix": "nic1",
+    "nic1NamePrefix": "nic2",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
     "imageSKU": "2012-R2-Datacenter",
@@ -66,7 +66,7 @@
             }
           }
         ],
-        "storage": "[parameters('storageAccountName')]"
+        "storage": "[variables('vnetName')]"
       }
     },
         {
