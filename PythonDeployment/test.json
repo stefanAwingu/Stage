@@ -71,9 +71,6 @@
         "displayName": "NetworkInterface"
       },
       "properties": {
-      "networkSecurityGroup":{  
-         "id":"/subscriptions/{guid}/resourceGroups/{parameters('existingVirtualNetworkResourceGroup')}/providers/Microsoft.Network/networkSecurityGroups/arm-deployment-nsg"
-      },
         "ipConfigurations": [
           {
             "name": "ipconfig1",
