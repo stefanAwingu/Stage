@@ -121,11 +121,11 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "osdisk",
+            "name": "pythonWindows",
             "vhd": {
-              "uri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/','osdisk', '.vhd')]"
+              "uri": "[concat('http://','pythondeploy','.blob.core.windows.net/vhds/','pythonWindows', '.vhd')]"
             },
-            "caching": "ReadWrite",
+            "caching": "None",
             "createOption": "FromImage"
           }
         },
