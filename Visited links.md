@@ -31,3 +31,11 @@
 
 ### Policies
 [http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html](http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html "http://mctexpert.blogspot.be/2011/04/how-to-enable-disable-basic-gpo-setting.html")
+
+### PythonDeployment
+
+[Azure authoring templates](https://azure.microsoft.com/en-us/documentation/articles/resource-group-authoring-templates/)
+
+[Azure SDK for python](https://azure-sdk-for-python.readthedocs.org/en/latest/index.html)
+
+[Azure Github basic JSON file](https://github.com/Azure/azure-quickstart-templates/blob/master/201-specialized-vm-in-existing-vnet/azuredeploy.json)
