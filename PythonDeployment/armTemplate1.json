@@ -42,6 +42,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('storageAccountName')]",
       "apiVersion": "2015-05-01-preview",
+      "vnetResourceGroupName":"[parameters{'storageAccountName')]"
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
