@@ -4,7 +4,7 @@
     "parameters": {
     
         "location": {
-            "value": "West EU"
+            "value": "westeurope"
         },
         "dnsNameForPublicIP": {
             "value": "test"
