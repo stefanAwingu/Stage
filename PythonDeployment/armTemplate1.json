@@ -65,8 +65,7 @@
               "addressPrefix": "[variables('subnetPrefix')]"
             }
           }
-        ],
-        "storage": "[variables('vnetName')]"
+        ]
       }
     },
     {
