@@ -42,18 +42,20 @@
       "metadata": {
         "description": "Name of the subnet in the virtual network you want to use"
       }
+    },
+    "vmName":{
+      "type": "string",
+      "defaultValue": "TestPythonDeploy"
     }
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
-    "addressPrefix": "172.26.17.0/16",
-    "subnetPrefix": "172.26.17.0/24",
-    "nic1NamePrefix": "nic2",
+    "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
     "imageSKU": "2012-R2-Datacenter",
     "vnetName": "qazureng",
-    "vmNamePrefix": "TestDeployment",
+    "vmNamePrefix": "[parameters('vmName')]",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
   },
@@ -92,7 +94,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "myVM",
+      "name": "[parameters('vmName')],
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
@@ -127,7 +129,7 @@
           "networkInterfaces": [
             {
               "properties": {
-                "primary": true
+                "primary": "true"
               },
               "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic1NamePrefix'))]"
             },
