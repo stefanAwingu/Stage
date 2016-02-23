@@ -22,6 +22,13 @@
       "defaultValue": "arm-deployment",
       "type": "string"
     },
+    "existingVirtualNetworkResourceGroup": {
+      "type": "string",
+      "defaultValue": "qazureng",
+      "metadata": {
+        "description": "Name of the existing VNET resource group"
+      }
+    }
   },
   "variables": {
     "storageAccountType": "Standard_LRS",
@@ -34,8 +41,8 @@
     "imageSKU": "2012-R2-Datacenter",
     "vnetName": "qazureng",
     "vmNamePrefix": "TestDeployment",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('vnetName'))]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('existingVirtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]"
   },
   "resources": [
     {
@@ -49,33 +56,12 @@
     },
     {
       "apiVersion": "2015-05-01-preview",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('vnetName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nic1NamePrefix')]",
       "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworks/', variables('vnetName'))]",
-      ],
+      "tags": {
+        "displayName": "NetworkInterface"
+      },
       "properties": {
         "ipConfigurations": [
           {
