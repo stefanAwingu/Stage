@@ -51,6 +51,7 @@
     "StorageAccountName": {
       "defaultValue": "arm-deployment",
       "type": "string"
+    }
     },
   "variables": {
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', parameters('existingVirtualNetworkName'))]",
