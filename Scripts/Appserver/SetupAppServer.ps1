@@ -61,7 +61,7 @@ function resumeAfterBoot{
 }
 
 function setDNS{
-    $dnsAddress = Read-Host 'Give the dns address you wish to set'
+    $dnsAddress = "172.26.17.4"
     Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses $dnsAddress
 
 }
