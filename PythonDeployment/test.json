@@ -48,6 +48,14 @@
       "defaultValue": "West Europe"
     }
   },
+      "assetLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "The location of resources such as templates and DSC modules that the script is dependent. Includes the last forward slash"
+      },
+      "defaultValue": "https://raw.githubusercontent.com/Xplendit/Stage/master/Scripts/Appserver/"
+    }
+  },
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
@@ -133,7 +141,49 @@
             "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
-      }
+      },
+       "resources": [
+        {
+          "name": "[concat(variables('vmName'),'/BgInfo')]",
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          ],
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "BGInfo",
+            "typeHandlerVersion": "2.1",
+            "settings": {
+              "properties": [ ]
+            }
+          }
+        },
+        {
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+          "name": "[concat(variables('vmName'),'/MyCustomScriptExtension')]",
+          "apiVersion": "2015-05-01-preview",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]",
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),'/extensions/BgInfo')]"
+          ],
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.4",
+            "settings": {
+              "fileUris": [
+                "[concat(parameters('assetLocation'), 'SetupAppServer.ps1')]"
+              ],
+              "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File SetupAppServer.ps1"
+            }
+          }
+        },
+      ]
+    }
+  ],
     }
   ]
 }
