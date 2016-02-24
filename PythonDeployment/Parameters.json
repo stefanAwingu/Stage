@@ -1,0 +1,29 @@
+{
+  "storageAccountName":{
+      "value": "pythondeploy"
+  },
+  "adminUsername":{
+      "value": "azure"
+  },
+  "adminPassword":{
+      "value": "S3rv3r123"
+  },
+  "vmSize":{
+      "value": "Standard_A2"
+  },
+  "existingVirtualNetworkResourceGroup":{
+      "value": "qazureng"
+  },
+  "existingVirtualNetworkName":{
+      "value": "qazureng"
+  },
+  "subnetName":{
+      "value": "azure-python"
+  },
+  "vmName":{
+      "value": "TestPyDeploy"
+  },
+  "location":{
+      "value": "West Europe"
+  }
+}
