@@ -111,7 +111,7 @@
           "osDisk": {
             "name": "pythonWindows",
             "vhd": {
-              "uri": "[concat('http://','pythondeploy','.blob.core.windows.net/vhds/','pythonWindows', paramters('vmName'),'.vhd')]"
+              "uri": "[concat('http://','pythondeploy','.blob.core.windows.net/vhds/','pythonWindows', parameters('vmName'),'.vhd')]"
             },
             "caching": "None",
             "createOption": "FromImage"
