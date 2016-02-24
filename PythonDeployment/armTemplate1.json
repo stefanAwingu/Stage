@@ -54,7 +54,6 @@
     "imageOffer": "WindowsServer",
     "imageSKU": "2012-R2-Datacenter",
     "vnetName": "qazureng",
-    "vmNamePrefix": "[parameters('vmName')]",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
     "securityGroupName":"arm-deployment-nsg"
@@ -98,7 +97,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computername": "[variables('vmName')]",
+          "computername": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
