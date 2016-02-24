@@ -136,12 +136,12 @@
       },
        "resources": [
         {
-          "name": "[concat(variables('vmName'),'/BgInfo')]",
+          "name": "[concat(parameters('vmName'),'/BgInfo')]",
           "type": "Microsoft.Compute/virtualMachines/extensions",
           "location": "[resourceGroup().location]",
           "apiVersion": "2015-06-15",
           "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
           ],
           "properties": {
             "publisher": "Microsoft.Compute",
@@ -154,12 +154,12 @@
         },
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
-          "name": "[concat(variables('vmName'),'/MyCustomScriptExtension')]",
+          "name": "[concat(parameters('vmName'),'/MyCustomScriptExtension')]",
           "apiVersion": "2015-05-01-preview",
           "location": "[resourceGroup().location]",
           "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]",
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),'/extensions/BgInfo')]"
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'),'/extensions/BgInfo')]"
           ],
           "properties": {
             "publisher": "Microsoft.Compute",
