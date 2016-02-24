@@ -48,14 +48,6 @@
       "defaultValue": "West Europe"
     }
   },
-    "assetLocation": {
-      "type": "string",
-      "metadata": {
-        "description": "The location of resources such as templates and DSC modules that the script is dependent. Includes the last forward slash"
-      },
-        "defaultValue": "https://raw.githubusercontent.com/Xplendit/Stage/master/Scripts/Appserver/"
-    }
-  },
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
@@ -175,7 +167,7 @@
             "typeHandlerVersion": "1.4",
             "settings": {
               "fileUris": [
-                "[concat(parameters('assetLocation'), 'SetupAppServer.ps1')]"
+                "[concat(https://raw.githubusercontent.com/Xplendit/Stage/master/Scripts/Appserver/, 'SetupAppServer.ps1')]"
               ],
               "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File SetupAppServer.ps1"
             }
