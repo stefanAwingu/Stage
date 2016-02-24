@@ -62,7 +62,6 @@
         "accountType": "[variables('storageAccountType')]"
       }
     },
-    {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
@@ -146,7 +145,6 @@
           }
         }
       }
-    }
     }
     }
   ]
