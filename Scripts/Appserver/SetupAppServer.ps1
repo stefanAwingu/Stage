@@ -38,8 +38,11 @@ function setupRegKey{
 }
 
 function addToDomain{
-$domainName = Read-Host 'Give the domain name you wish to join.'
-Add-Computer -DomainName $domainName -Restart
+$domainName = "awingu.test"
+$password = "Hackaton2015" | ConvertTo-SecureString -asPlainText -Force
+$username = "cloud3" 
+$credential = New-Object System.Management.Automation.PSCredential($username,$password)
+Add-Computer -DomainName $domainName -Credential $credential -Restart
 if($Error[0].ToString() -match "The specified domain either does not exist or could not be contacted"){
     Write-Host "Please enter a valid domain name."
     $Error.Clear()
