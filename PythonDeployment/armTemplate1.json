@@ -18,10 +18,6 @@
       "defaultValue": "Standard_A2",
       "type": "string"
     },
-    "StorageAccountName": {
-      "defaultValue": "arm-deployment",
-      "type": "string"
-    },
     "existingVirtualNetworkResourceGroup": {
       "type": "string",
       "defaultValue": "qazureng",
@@ -53,7 +49,6 @@
     }
   },
   "variables": {
-    "storageAccountType": "Standard_LRS",
     "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
@@ -65,15 +60,6 @@
     "securityGroupName":"arm-deployment-nsg"
   },
   "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageAccountName')]",
-      "apiVersion": "2015-05-01-preview",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "accountType": "[variables('storageAccountType')]"
-      }
-    },
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/networkInterfaces",
@@ -105,7 +91,6 @@
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nic1NamePrefix'))]",
       ],
       "properties": {
@@ -113,7 +98,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computername": "[variables('vmNamePrefix')]",
+          "computername": "[variables('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -146,7 +131,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "true",
-            "storageUri": "[concat('http://',parameters('StorageAccountName'),'.blob.core.windows.net')]"
+            "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
       }
