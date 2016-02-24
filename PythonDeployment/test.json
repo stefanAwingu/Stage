@@ -34,26 +34,22 @@
     }
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
-    "sizeOfDiskInGB": "100",
-    "dataDisk1VhdName": "datadisk1",
+    "storageAccountName": "pythondeploy",
     "location": "[resourceGroup().location]",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
     "OSDiskName": "osdiskforwindowssimple",
     "nicName": "myVMNic",
-    "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
-    "subnetPrefix": "10.0.0.0/24",
+    "subnetName": "azure-python",
     "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "myPublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
     "vmName": "SimpleWindowsVM",
-    "vmSize": "Standard_D1",
-    "virtualNetworkName": "MyVNET",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "vmSize": "Standard_A2",
+    "virtualNetworkName": "qazureng",
+    "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
     "apiVersion": "2015-06-15"
   },
   "resources": [
@@ -76,27 +72,6 @@
         "dnsSettings": {
           "domainNameLabel": "[parameters('dnsLabelPrefix')]"
         }
-      }
-    },
-    {
-      "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[variables('location')]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
-            }
-          }
-        ]
       }
     },
     {
@@ -158,18 +133,6 @@
             "caching": "ReadWrite",
             "createOption": "FromImage"
           },
-          "dataDisks": [
-            {
-              "name": "datadisk1",
-              "diskSizeGB": "[variables('sizeOfDiskInGB')]",
-              "lun": 0,
-              "vhd": {
-                "uri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('dataDisk1VhdName'),'.vhd')]"
-              },
-              "createOption": "Empty"
-            }
-          ]
-        },
         "networkProfile": {
           "networkInterfaces": [
             {
