@@ -98,7 +98,6 @@
             }
           }
         ]
-      }
     },
     {
       "apiVersion": "[variables('apiVersion')]",
@@ -148,6 +147,7 @@
         }
       }
     }
+    }
+    }
   ]
-}
 }
