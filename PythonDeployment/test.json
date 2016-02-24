@@ -49,7 +49,7 @@
     "vmSize": "Standard_A2",
     "virtualNetworkName": "qazureng",
     "vnetID": "[resourceId(variables('virtualNetworkName'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/', variables('subnetName'))]",
     "apiVersion": "2015-06-15"
   },
   "resources": [
