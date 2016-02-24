@@ -39,3 +39,5 @@
 [Azure SDK for python](https://azure-sdk-for-python.readthedocs.org/en/latest/index.html)
 
 [Azure Github basic JSON file](https://github.com/Azure/azure-quickstart-templates/blob/master/201-specialized-vm-in-existing-vnet/azuredeploy.json)
+
+[SSH to private ports](http://unix.stackexchange.com/questions/87432/ssh-to-private-ip)
