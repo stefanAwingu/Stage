@@ -1,8 +1,8 @@
 #Get FQDN of verander dit en geef FQDN van remote server in
-$serverNaam = "Demo-server.awingu.test"           <#(Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain#>
+           <#(Get-WmiObject win32_computersystem).DNSHostName+"."+(Get-WmiObject win32_computersystem).Domain#>
 $collectionNaam = "RemoteApssCollection"
 
-
+Function Deploy($servernaam){
 try{
    #Maakt nieuwe Remote Desktop Session role aan met ConnectionBroker, SessionHost en WebAccesServer (gelijk aan quickinstall via GUI)
    #Problem: Kan niet local runnen dus moet vanuit een andere desktop uit hetzelfde domein
@@ -36,3 +36,6 @@ catch{
    Write-Host "Er is een fout opgetreden."   
    Write-Error $_.Exception.Message
 }
+}
+
+Deploy($args[0])
