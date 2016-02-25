@@ -46,8 +46,8 @@
     "location": {
       "type": "string",
       "defaultValue": "West Europe"
-    }
-	"domainToJoin": {
+    },
+    "domainToJoin": {
       "type": "string",
       "metadata": {
         "description": "The FQDN of the AD domain"
