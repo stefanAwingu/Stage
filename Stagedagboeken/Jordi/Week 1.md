@@ -23,3 +23,4 @@
 - Demo geven van de afgewerkte scripts
 - GPO manueel instellen en dit backuppen
 - GPO backup via een command importen   
+
