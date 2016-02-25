@@ -47,7 +47,7 @@
       "type": "string",
       "defaultValue": "West Europe"
     },
-    "domainToJoin": {
+  	"domainToJoin": {
       "type": "string",
       "metadata": {
         "description": "The FQDN of the AD domain"
@@ -64,7 +64,7 @@
       "metadata": {
         "description": "Password of the account on the domain"
       }
-    }
+    },
   },
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
@@ -151,7 +151,7 @@
             "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
-      },
+      }
 	   {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines/extensions",
