@@ -41,3 +41,5 @@
 [Azure Github basic JSON file](https://github.com/Azure/azure-quickstart-templates/blob/master/201-specialized-vm-in-existing-vnet/azuredeploy.json)
 
 [SSH to private ports](http://unix.stackexchange.com/questions/87432/ssh-to-private-ip)
+
+[Double Hop issue with PS remoting](https://blogs.technet.microsoft.com/heyscriptingguy/2013/04/04/enabling-multihop-remoting/)
