@@ -173,7 +173,7 @@
           "Password": "[parameters('domainPassword')]"
         }
       }
-    }
+    },
        "resources": [
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
