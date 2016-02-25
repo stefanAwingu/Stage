@@ -28,15 +28,6 @@
   },
   "location":{
       "value": "West Europe"
-  },
-  "domainToJoin": {
-      "value": "awingu.test"
-    },
-  "domainUsername": {
-      "value": "cloud3"
-    },
-  "domainPassword": {
-      "value": "Hackaton2015"
-    }
+  }
   }
 }
