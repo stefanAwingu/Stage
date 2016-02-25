@@ -46,26 +46,8 @@
     "location": {
       "type": "string",
       "defaultValue": "West Europe"
+    }
   },
-    "domainToJoin": {
-      "type": "string",
-      "metadata": {
-        "description": "The FQDN of the AD domain"
-      }
-    },
-    "domainUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Username of the account on the domain"
-      }
-    },
-    "domainPassword": {
-      "type": "string",
-      "metadata": {
-        "description": "Password of the account on the domain"
-      }
-    },
-  }
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
@@ -152,28 +134,6 @@
           }
         }
       },
-       {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/joindomain')]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "JsonADDomainExtension",
-        "typeHandlerVersion": "1.0",
-        "settings": {
-          "Name": "[parameters('domainToJoin')]",
-          "User": "[concat(parameters('domainToJoin'), '\\', parameters('domainUsername'))]",
-          "Restart": "true",
-        },
-        "protectedsettings": {
-          "Password": "[parameters('domainPassword')]"
-        }
-      }
-       }
        "resources": [
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
