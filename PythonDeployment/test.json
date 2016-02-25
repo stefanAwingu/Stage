@@ -46,7 +46,6 @@
     "location": {
       "type": "string",
       "defaultValue": "West Europe"
-    }
   },
     "domainToJoin": {
       "type": "string",
@@ -66,6 +65,7 @@
         "description": "Password of the account on the domain"
       }
     },
+  }
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
     "imagePublisher": "MicrosoftWindowsServer",
