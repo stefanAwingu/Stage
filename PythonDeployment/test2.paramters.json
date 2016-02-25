@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters":{
+  "storageAccountName":{
+      "value": "pythondeploy"
+  },
+  "adminUsername":{
+      "value": "azure"
+  },
+  "adminPassword":{
+      "value": "S3rv3r123"
+  },
+  "vmSize":{
+      "value": "Standard_A2"
+  },
+  "existingVirtualNetworkResourceGroup":{
+      "value": "qazureng"
+  },
+  "existingVirtualNetworkName":{
+      "value": "qazureng"
+  },
+  "subnetName":{
+      "value": "azure-python"
+  },
+  "vmName":{
+      "value": "TestPyDeploy3"
+  },
+  "location":{
+      "value": "West Europe"
+  },
+  "domainToJoin": {
+      "value": "awingu.test"
+    },
+  "domainUsername": {
+      "value": "cloud3"
+    },
+  "domainPassword": {
+      "value": "Hackaton2015"
+    }
+  }
+}
