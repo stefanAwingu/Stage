@@ -133,7 +133,7 @@
             "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
-      }
+      },
       "resources": [
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
