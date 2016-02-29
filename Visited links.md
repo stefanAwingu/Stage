@@ -43,3 +43,5 @@
 [SSH to private ports](http://unix.stackexchange.com/questions/87432/ssh-to-private-ip)
 
 [Double Hop issue with PS remoting](https://blogs.technet.microsoft.com/heyscriptingguy/2013/04/04/enabling-multihop-remoting/)
+
+[Possible Double Hop solution](http://stackoverflow.com/questions/32391725/need-to-remote-access-second-hops-via-powershell-with-invoke-command)
