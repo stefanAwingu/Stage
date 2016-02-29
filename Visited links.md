@@ -45,3 +45,5 @@
 [Double Hop issue with PS remoting](https://blogs.technet.microsoft.com/heyscriptingguy/2013/04/04/enabling-multihop-remoting/)
 
 [Possible Double Hop solution](http://stackoverflow.com/questions/32391725/need-to-remote-access-second-hops-via-powershell-with-invoke-command)
+
+[Alternative to PyWinRM](http://code.activestate.com/recipes/577945-execute-remote-commands-on-windows-like-psexec/)
