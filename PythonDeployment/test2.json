@@ -151,7 +151,7 @@
              "fileUris": [
                 "[concat('https://','raw.githubusercontent.com/Xplendit/Stage/master/Scripts/Appserver/', 'SetupAppServer.ps1')]"
               ],
-              "commandToExecute": "powershell.exe SetupAppServer.ps1"
+              "commandToExecute": "powershell.exe -file SetupAppServer.ps1"
             }
           }
         },
