@@ -46,25 +46,7 @@
     "location": {
       "type": "string",
       "defaultValue": "West Europe"
-    },
-  	"domainToJoin": {
-      "type": "string",
-      "metadata": {
-        "description": "The FQDN of the AD domain"
-      }
-    },
-    "domainUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Username of the account on the domain"
-      }
-    },
-    "domainPassword": {
-      "type": "string",
-      "metadata": {
-        "description": "Password of the account on the domain"
-      }
-    },
+    }
   },
   "variables": {
     "nic1NamePrefix": "[parameters('vmName')]",
@@ -74,8 +56,7 @@
     "vnetName": "qazureng",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
-    "securityGroupName":"arm-deployment-nsg",
-    "dnsServers":"172.26.17.4"
+    "securityGroupName":"arm-deployment-nsg"
   },
   "resources": [
     {
@@ -100,13 +81,10 @@
         ],
         "networkSecurityGroup": {
           "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('securityGroupName'))]"
-        },
-        "dnsSettings": {
-            "dnsServers": "[variables('dnsServers')]"
-            }         
+        }
       }
-    }, 
-	{
+    },
+    {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
@@ -155,32 +133,10 @@
             "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
-      }
-    },
-{
-       "apiVersion": "2015-06-15",
-       "type": "Microsoft.Compute/virtualMachines/extensions",
-       "name": "[concat(parameters('vmName'),'/joindomain')]",
-       "location": "[resourceGroup().location]",
-       "dependsOn": [
-         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-       ],
-       "properties": {
-         "publisher": "Microsoft.Compute",
-         "type": "JsonADDomainExtension",
-         "typeHandlerVersion": "1.0",
-         "settings": {
-           "Name": "[parameters('domainToJoin')]",
-           "User": "[concat(parameters('domainToJoin'), '\\', parameters('domainUsername'))]",
-           "Restart": "true"
-         },
-         "protectedsettings": {
-           "Password": "[parameters('domainPassword')]"
-         }
-       }
-     },
-{       
-         "type": "Microsoft.Compute/virtualMachines/extensions",
+      },
+       "resources": [
+        {
+          "type": "Microsoft.Compute/virtualMachines/extensions",
           "name": "[concat(parameters('vmName'),'/MyCustomScriptExtension')]",
           "apiVersion": "2015-05-01-preview",
           "location": "[resourceGroup().location]",
@@ -195,10 +151,11 @@
              "fileUris": [
                 "[concat('https://','raw.githubusercontent.com/Xplendit/Stage/master/Scripts/Appserver/', 'SetupAppServer.ps1')]"
               ],
-              "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File SetupAppServer.ps1"
+              "commandToExecute": "powershell.exe SetupAppServer.ps1"
             }
           }
         },
-	
+      ]
+    }
   ],
     }
