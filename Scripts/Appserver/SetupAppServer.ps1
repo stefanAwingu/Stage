@@ -1,3 +1,3 @@
 mkdir test
 echo "Hello World"
-Start-Sleep -s 10
+Start-Sleep -s 30
