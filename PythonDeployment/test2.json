@@ -56,11 +56,12 @@
     "vnetName": "qazureng",
     "vnetID": "[resourceId(parameters('existingVirtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks', 'qazureng')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnetName'))]",
-    "securityGroupName":"arm-deployment-nsg"
+    "securityGroupName":"arm-deployment-nsg",
+    "apiVersion":"2015-05-01-preview"
   },
   "resources": [
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nic1NamePrefix')]",
       "location": "[resourceGroup().location]",
@@ -85,7 +86,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
@@ -138,7 +139,7 @@
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
           "name": "[concat(parameters('vmName'),'/MyCustomScriptExtension')]",
-          "apiVersion": "2015-05-01-preview",
+          "apiVersion": "[variables('apiVersion')]",
           "location": "[resourceGroup().location]",
           "dependsOn": [
             "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
@@ -154,7 +155,31 @@
               "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -file SetupAppServer.ps1"
             }
           }
-        },
+        }
+        {
+          "apiVersion": "[variables('apiVersion')]",
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+          "name": "[concat(variables('vmName'),'/joindomain')]",
+          "location": "[resourceGroup().location]",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          ],
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "JsonADDomainExtension",
+            "typeHandlerVersion": "1.0",
+            "settings": {
+              "Name": "[parameters('domainToJoin')]",
+              "OUPath": "[parameters('ouPath')]",
+              "User": "[concat(parameters('domainToJoin'), '\\', parameters('domainUsername'))]",
+              "Restart": "true",
+              "Options": "[parameters('domainJoinOptions')]"
+            },
+            "protectedsettings": {
+              "Password": "[parameters('domainPassword')]"
+            }
+          }
+      }
       ]
     }
   ],
