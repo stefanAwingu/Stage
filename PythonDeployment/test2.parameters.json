@@ -37,6 +37,12 @@
     },
    "domainPassword": {
       "value": "Hackaton2015"
+    },
+   "ouPath": {
+      "value": ""
+    },
+    "domainJoinOptions": {
+      "value": 3
     }
   }
 }
