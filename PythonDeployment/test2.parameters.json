@@ -24,7 +24,7 @@
       "value": "azure-python"
   },
   "vmName":{
-      "value": "TestPyDeploy2"
+      "value": "TestPyDeploy"
   },
   "location":{
       "value": "West Europe"
